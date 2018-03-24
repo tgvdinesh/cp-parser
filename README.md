@@ -10,7 +10,8 @@ DOM Parser for CP
 
 
 # Road Map
-- [ ] Implement parser for all Competitive Programming websites
 - [ ] Implement parser for multiple sample input/output [Sample 1](https://www.hackerrank.com/challenges/30-conditional-statements/problem)
+- [ ] Implement parser for all Competitive Programming websites
+- [ ] Show [Progress Indicator](https://github.com/JetBrains/intellij-community/search?utf8=%E2%9C%93&q=ProgressIndicator&type=)
 - [ ] Implement quality assurance
 - [ ] [Publish IntelliJ plugin](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/publishing_plugin.html)
