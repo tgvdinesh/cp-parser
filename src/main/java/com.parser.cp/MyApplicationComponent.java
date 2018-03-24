@@ -3,6 +3,7 @@ package com.parser.cp;
 import com.intellij.ide.RecentProjectsManager;
 import com.intellij.ide.ReopenProjectAction;
 import com.intellij.ide.impl.ProjectUtil;
+import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.application.TransactionGuard;
 import com.intellij.openapi.components.ApplicationComponent;
@@ -12,6 +13,7 @@ import com.parser.cp.exception.ImpartialException;
 import com.parser.cp.impl.HackerRankDomParserImpl;
 import com.parser.cp.model.Question;
 import com.parser.cp.model.Task;
+import com.parser.cp.util.Common;
 import com.parser.cp.util.Constant;
 import com.parser.cp.util.FileUtility;
 import org.jetbrains.annotations.NotNull;
@@ -75,17 +77,18 @@ public class MyApplicationComponent implements ApplicationComponent {
                             builder.append(s).append('\n');
                         final String page = embedHTML(builder.toString());
                         TransactionGuard.getInstance().submitTransactionAndWait(() -> {
-                            LOGGER.info("1. Loading project");
+                            Common.sendMessage("Loading Project", NotificationType.INFORMATION);
                             loadProject();
                         });
                         TransactionGuard.getInstance().submitTransactionAndWait(() -> {
-                            LOGGER.info("2. Parsing.");
+                            Common.sendMessage("Parsing Input", NotificationType.INFORMATION);
                             DomParser domParser = new HackerRankDomParserImpl();
                             try {
                                 Task task = domParser.parse(page);
                                 initializeTask(task);
                                 LOGGER.info("Whatever");
                             } catch (ImpartialException e) {
+                                Common.sendMessage("Error occurred during parsing", NotificationType.ERROR);
                                 LOGGER.severe("Error occurred during parsing : " + e.getLocalizedMessage());
                             }
                         });
@@ -124,13 +127,14 @@ public class MyApplicationComponent implements ApplicationComponent {
         } else {
             Optional<Project> neededProject = Arrays.stream(openProjects).filter(currentProject -> currentProject.getName().equals(Constant.PROJECT_NAME)).findFirst();
             if (!neededProject.isPresent()) {
-                LOGGER.info("Project is already open");
+                Common.sendMessage("java-cp project is not open", NotificationType.ERROR);
+                /*LOGGER.info("Project is already open");
                 try {
                     openFromRecent();
                 } catch (Exception e) {
                     LOGGER.info("Needed project was not found in recent history. Load as new project from template");
                     createProjectFromTemplate();
-                }
+                }*/
             } else {
                 LOGGER.info("We have the project open already. Load data in it.");
             }
@@ -144,7 +148,7 @@ public class MyApplicationComponent implements ApplicationComponent {
      * 2. Clone from URL
      * 3. Cancel task.
      *
-     * @return
+     * @return Returns false if user cancels the action
      */
     private boolean actionDialog() {
         return false;
