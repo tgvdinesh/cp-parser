@@ -10,7 +10,7 @@ DOM Parser for CP
 
 
 # Road Map
-[ ] Implement parser for all Competitive Programming websites
-[ ] Implement parser for multiple sample input/output
-[ ] Implement quality assurance
-[ ] [Publish IntelliJ plugin](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/publishing_plugin.html)
+- [ ] Implement parser for all Competitive Programming websites
+- [ ] Implement parser for multiple sample input/output
+- [ ] Implement quality assurance
+- [ ] [Publish IntelliJ plugin](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/publishing_plugin.html)
