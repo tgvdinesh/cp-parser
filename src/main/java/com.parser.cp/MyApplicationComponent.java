@@ -72,7 +72,7 @@ public class MyApplicationComponent implements ApplicationComponent {
                         while ((s = bufferedReader.readLine()) != null)
                             builder.append(s).append('\n');
                         final String page = embedHTML(builder.toString());
-
+                        LOGGER.info(page.substring(page.indexOf("{\"url\""), page.length() - 1));
                         /*TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                             Common.sendMessage("Loading Project", NotificationType.INFORMATION);
                             loadProject();

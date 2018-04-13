@@ -10,6 +10,9 @@ DOM Parser for CP
 
 
 # Road Map
+- [ ] Bind Json to POJO
+- [ ] Add Enumeration to POJO
+- [ ] Write method in POJO to find CP Website name
 - [ ] Implement parser for multiple sample input/output [Sample 1](https://www.hackerrank.com/challenges/30-conditional-statements/problem)
 - [ ] Implement parser for all Competitive Programming websites
 - [ ] Show [Progress Indicator](https://github.com/JetBrains/intellij-community/search?utf8=%E2%9C%93&q=ProgressIndicator&type=)
