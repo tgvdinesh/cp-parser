@@ -1,9 +1,11 @@
 package com.parser.cp.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.parser.cp.exception.ImpartialException;
+import com.parser.cp.model.BrowserPayLoad;
 import com.parser.cp.model.Question;
 import com.parser.cp.model.Task;
 import org.jetbrains.annotations.NotNull;
@@ -11,6 +13,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +52,10 @@ public class Common {
         }
         task.addQuestions(question);
         return task;
+    }
+
+    public static Optional<BrowserPayLoad> jsonToJava(String jsonAsString) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return Optional.of(objectMapper.readValue(jsonAsString, BrowserPayLoad.class));
     }
 }

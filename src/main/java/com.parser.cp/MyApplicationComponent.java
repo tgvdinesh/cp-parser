@@ -8,6 +8,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import com.parser.cp.model.BrowserPayLoad;
 import com.parser.cp.model.Question;
 import com.parser.cp.model.Task;
 import com.parser.cp.util.Common;
@@ -71,8 +72,15 @@ public class MyApplicationComponent implements ApplicationComponent {
                         String s;
                         while ((s = bufferedReader.readLine()) != null)
                             builder.append(s).append('\n');
-                        final String page = embedHTML(builder.toString());
+                        final String page = builder.toString();
                         LOGGER.info(page.substring(page.indexOf("{\"url\""), page.length() - 1));
+                        Optional<BrowserPayLoad> browserPayLoad = Common.jsonToJava(page.substring(page.indexOf("{\"url\""), page.length() - 1));
+                        if (browserPayLoad.isPresent()) {
+                            try {
+                                DomParserFactory.getParser(browserPayLoad.get().getUrl());
+                            } catch (Exception parserDoNotExistException) {
+                                Common.sendMessage("We don't support the website yet", NotificationType.ERROR);
+                            }
                         /*TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                             Common.sendMessage("Loading Project", NotificationType.INFORMATION);
                             loadProject();
@@ -89,6 +97,7 @@ public class MyApplicationComponent implements ApplicationComponent {
                                 LOGGER.severe("Error occurred during parsing : " + e.getLocalizedMessage());
                             }
                         });*/
+                        }
 
                         /*1. Parse DOM in background. This means
                          * 1.1 If any other project is open then prompt user to load our module*/
