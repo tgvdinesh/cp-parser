@@ -16,6 +16,8 @@ public class CodeChefDomParserImpl implements DomParser {
     static {
         INPUT_SELECTORS.add("#content div.challenge_sample_input_body");
         OUTPUT_SELECTORS.add("#content div.challenge_sample_output_body");
+        INPUT_SELECTORS.add("#problem-statement pre:nth-child(16)");
+        OUTPUT_SELECTORS.add("#problem-statement pre:nth-child(18)");
     }
 
     @Override

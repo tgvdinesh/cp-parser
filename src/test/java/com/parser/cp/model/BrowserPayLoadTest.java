@@ -11,13 +11,13 @@ public class BrowserPayLoadTest {
 
     @Test
     public void bindingSuccess() throws IOException {
-        String sampleJson = "{\"htmlBody\":\"\",\"url\":\"https://www.hackerrank.com/challenges/30-loops/problem\"}";
+        String sampleJson = "{\"sender\":\"hackerrank\",\"htmlBody\":\"<html></html>\",\"url\":\"https://www.hackerrank.com/challenges/30-loops/problem\"}";
         Assert.assertTrue("POJO binding error", Common.jsonToJava(sampleJson).isPresent());
     }
 
     @Test
     public void bindingError() {
-        String sampleJson = "{\"incorrectTag\":\"\",\"url\":\"https://www.hackerrank.com/challenges/30-loops/problem\"}";
+        String sampleJson = "{\"incorrectTagName\":\"hackerrank\",\"htmlBody\":\"<html></html>\",\"url\":\"https://www.hackerrank.com/challenges/30-loops/problem\"}";
         try {
             Common.jsonToJava(sampleJson);
         } catch (IOException e) {

@@ -16,6 +16,8 @@ public class BrowserPayLoad {
     private String htmlBody;
     @JsonProperty("url")
     private String url;
+    @JsonProperty("sender")
+    private String sender;
 
     @JsonProperty("htmlBody")
     public String getHtmlBody() {
@@ -35,6 +37,16 @@ public class BrowserPayLoad {
     @JsonProperty("url")
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @JsonProperty("sender")
+    public String getSender() {
+        return sender;
+    }
+
+    @JsonProperty("sender")
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     @Override

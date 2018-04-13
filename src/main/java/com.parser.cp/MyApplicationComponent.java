@@ -5,9 +5,11 @@ import com.intellij.ide.ReopenProjectAction;
 import com.intellij.ide.impl.ProjectUtil;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.application.TransactionGuard;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import com.parser.cp.exception.ImpartialException;
 import com.parser.cp.model.BrowserPayLoad;
 import com.parser.cp.model.Question;
 import com.parser.cp.model.Task;
@@ -76,29 +78,24 @@ public class MyApplicationComponent implements ApplicationComponent {
                         LOGGER.info(page.substring(page.indexOf("{\"url\""), page.length() - 1));
                         Optional<BrowserPayLoad> browserPayLoad = Common.jsonToJava(page.substring(page.indexOf("{\"url\""), page.length() - 1));
                         if (browserPayLoad.isPresent()) {
-                            try {
-                                DomParserFactory.getParser(browserPayLoad.get().getUrl());
-                            } catch (Exception parserDoNotExistException) {
-                                Common.sendMessage("We don't support the website yet", NotificationType.ERROR);
-                            }
-                        /*TransactionGuard.getInstance().submitTransactionAndWait(() -> {
-                            Common.sendMessage("Loading Project", NotificationType.INFORMATION);
-                            loadProject();
-                        });*/
-                        /*TransactionGuard.getInstance().submitTransactionAndWait(() -> {
-                            Common.sendMessage("Parsing Input", NotificationType.INFORMATION);
-                            DomParser domParser = new HackerRankDomParserImpl();
-                            try {
-                                Task task = domParser.parse(page);
-                                initializeTask(task);
-                                LOGGER.info("Whatever");
-                            } catch (ImpartialException e) {
-                                Common.sendMessage("Error occurred during parsing", NotificationType.ERROR);
-                                LOGGER.severe("Error occurred during parsing : " + e.getLocalizedMessage());
-                            }
-                        });*/
+                            TransactionGuard.getInstance().submitTransactionAndWait(() -> {
+                                Common.sendMessage("Loading Project", NotificationType.INFORMATION);
+                                loadProject();
+                            });
+                            TransactionGuard.getInstance().submitTransactionAndWait(() -> {
+                                Common.sendMessage("Parsing Input", NotificationType.INFORMATION);
+                                try {
+                                    DomParser domParser = DomParserFactory.getParser(browserPayLoad.get().getSender());
+                                    Task task = domParser.parse(browserPayLoad.get().getHtmlBody());
+                                    initializeTask(task);
+                                } catch (ImpartialException e) {
+                                    Common.sendMessage("Error occurred during parsing", NotificationType.ERROR);
+                                    LOGGER.severe("Error occurred during parsing : " + e.getLocalizedMessage());
+                                } catch (Exception parserDoNotExistException) {
+                                    Common.sendMessage("We don't support the website yet", NotificationType.ERROR);
+                                }
+                            });
                         }
-
                         /*1. Parse DOM in background. This means
                          * 1.1 If any other project is open then prompt user to load our module*/
                     } catch (IOException e) {

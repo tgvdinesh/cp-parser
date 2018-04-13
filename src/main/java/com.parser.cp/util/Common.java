@@ -22,7 +22,8 @@ public class Common {
     public static Optional<Elements> getElement(Document document, List<String> filterList) {
         for (String filter : filterList) {
             Elements element = document.select(filter);
-            return Optional.of(element);
+            if (element.size() != 0)
+                return Optional.of(element);
         }
         return Optional.empty();
     }
