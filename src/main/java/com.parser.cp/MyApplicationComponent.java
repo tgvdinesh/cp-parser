@@ -5,12 +5,9 @@ import com.intellij.ide.ReopenProjectAction;
 import com.intellij.ide.impl.ProjectUtil;
 import com.intellij.notification.NotificationType;
 import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.application.TransactionGuard;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
-import com.parser.cp.exception.ImpartialException;
-import com.parser.cp.impl.HackerRankDomParserImpl;
 import com.parser.cp.model.Question;
 import com.parser.cp.model.Task;
 import com.parser.cp.util.Common;
@@ -70,17 +67,17 @@ public class MyApplicationComponent implements ApplicationComponent {
                         Socket socket = serverSocket.accept();
                         BufferedReader bufferedReader = new BufferedReader(
                                 new InputStreamReader(socket.getInputStream(), "UTF-8"));
-                        final String type = bufferedReader.readLine();
                         StringBuilder builder = new StringBuilder();
                         String s;
                         while ((s = bufferedReader.readLine()) != null)
                             builder.append(s).append('\n');
                         final String page = embedHTML(builder.toString());
-                        TransactionGuard.getInstance().submitTransactionAndWait(() -> {
+
+                        /*TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                             Common.sendMessage("Loading Project", NotificationType.INFORMATION);
                             loadProject();
-                        });
-                        TransactionGuard.getInstance().submitTransactionAndWait(() -> {
+                        });*/
+                        /*TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                             Common.sendMessage("Parsing Input", NotificationType.INFORMATION);
                             DomParser domParser = new HackerRankDomParserImpl();
                             try {
@@ -91,7 +88,7 @@ public class MyApplicationComponent implements ApplicationComponent {
                                 Common.sendMessage("Error occurred during parsing", NotificationType.ERROR);
                                 LOGGER.severe("Error occurred during parsing : " + e.getLocalizedMessage());
                             }
-                        });
+                        });*/
 
                         /*1. Parse DOM in background. This means
                          * 1.1 If any other project is open then prompt user to load our module*/
