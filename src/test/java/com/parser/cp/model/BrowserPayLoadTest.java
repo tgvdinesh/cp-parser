@@ -10,16 +10,16 @@ import java.io.IOException;
 public class BrowserPayLoadTest {
 
     @Test
-    public void bindingSuccess() throws IOException {
+    public void deSerializationSuccess() throws IOException {
         String sampleJson = "{\"sender\":\"hackerrank\",\"htmlBody\":\"<html></html>\",\"url\":\"https://www.hackerrank.com/challenges/30-loops/problem\"}";
-        Assert.assertTrue("POJO binding error", Common.jsonToJava(sampleJson).isPresent());
+        Assert.assertTrue("POJO binding error", Common.deSerialize(sampleJson, BrowserPayLoad.class).isPresent());
     }
 
     @Test
-    public void bindingError() {
+    public void deSerializationError() {
         String sampleJson = "{\"incorrectTagName\":\"hackerrank\",\"htmlBody\":\"<html></html>\",\"url\":\"https://www.hackerrank.com/challenges/30-loops/problem\"}";
         try {
-            Common.jsonToJava(sampleJson);
+            Common.deSerialize(sampleJson, BrowserPayLoad.class);
         } catch (IOException e) {
             if (e instanceof UnrecognizedPropertyException)
                 Assert.assertFalse("Incorrect mapping should throw error", false);

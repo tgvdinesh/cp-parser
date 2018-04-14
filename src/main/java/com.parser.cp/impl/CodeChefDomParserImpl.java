@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CodeChefDomParserImpl implements DomParser {
-
     private static final List<String> INPUT_SELECTORS = new LinkedList<>();
     private static final List<String> OUTPUT_SELECTORS = new LinkedList<>();
 

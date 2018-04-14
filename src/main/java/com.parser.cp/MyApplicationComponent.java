@@ -76,7 +76,7 @@ public class MyApplicationComponent implements ApplicationComponent {
                             builder.append(s).append('\n');
                         final String page = builder.toString();
                         LOGGER.info(page.substring(page.indexOf("{\"url\""), page.length() - 1));
-                        Optional<BrowserPayLoad> browserPayLoad = Common.jsonToJava(page.substring(page.indexOf("{\"url\""), page.length() - 1));
+                        Optional<BrowserPayLoad> browserPayLoad = Common.deSerialize(page.substring(page.indexOf("{\"url\""), page.length() - 1), BrowserPayLoad.class);
                         if (browserPayLoad.isPresent()) {
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                                 Common.sendMessage("Loading Project", NotificationType.INFORMATION);
