@@ -7,26 +7,46 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "htmlBody",
+        "action",
+        "payload",
         "url"
 })
 public class BrowserPayLoad {
 
-    @JsonProperty("htmlBody")
-    private String htmlBody;
+    @JsonProperty("action")
+    private Integer action;
+    @JsonProperty("payload")
+    private PayLoad payload;
     @JsonProperty("url")
     private String url;
-    @JsonProperty("sender")
-    private String sender;
+    private WebsiteName websiteName;
 
-    @JsonProperty("htmlBody")
-    public String getHtmlBody() {
-        return htmlBody;
+    public WebsiteName getWebsiteName() {
+        return websiteName;
     }
 
-    @JsonProperty("htmlBody")
-    public void setHtmlBody(String htmlBody) {
-        this.htmlBody = htmlBody;
+    public void setWebsiteName(WebsiteName websiteName) {
+        this.websiteName = websiteName;
+    }
+
+    @JsonProperty("action")
+    public Integer getAction() {
+        return action;
+    }
+
+    @JsonProperty("action")
+    public void setAction(Integer action) {
+        this.action = action;
+    }
+
+    @JsonProperty("payload")
+    public PayLoad getPayload() {
+        return payload;
+    }
+
+    @JsonProperty("payload")
+    public void setPayload(PayLoad payload) {
+        this.payload = payload;
     }
 
     @JsonProperty("url")
@@ -39,19 +59,20 @@ public class BrowserPayLoad {
         this.url = url;
     }
 
-    @JsonProperty("sender")
-    public String getSender() {
-        return sender;
-    }
-
-    @JsonProperty("sender")
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("htmlBody", htmlBody).append("url", url).toString();
+        return new ToStringBuilder(this).append("action", action).append("payload", payload).append("url", url).toString();
+    }
+
+    public void setSender() {
+        if (url != null) {
+            if (url.matches("^https:\\/\\/(www[.])?hackerrank[.]com.*$"))
+                setWebsiteName(WebsiteName.HACKER_RANK);
+            else if (url.matches("^https:\\/\\/(www[.])?codechef[.]com.*$"))
+                setWebsiteName(WebsiteName.CODE_CHEF);
+            else
+                setWebsiteName(null);
+        }
     }
 
 }

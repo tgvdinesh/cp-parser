@@ -13,6 +13,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,5 +76,11 @@ public class Common {
      */
     public static <T> Optional<T> deSerialize(String jsonAsString, Class<T> preferredClass) throws IOException {
         return Optional.of(new ObjectMapper().readValue(jsonAsString, preferredClass));
+    }
+
+    public static String stackToString(Exception e) {
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        return sw.toString();
     }
 }

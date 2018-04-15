@@ -38,10 +38,6 @@ public class MyApplicationComponent implements ApplicationComponent {
     private ServerSocket serverSocket;
     private Project project;
 
-    private static String embedHTML(String innerHTML) {
-        return "<html><body>" + innerHTML + "</body></html>";
-    }
-
     private void setProject(Project project) {
         this.project = project;
     }
@@ -75,9 +71,11 @@ public class MyApplicationComponent implements ApplicationComponent {
                         while ((s = bufferedReader.readLine()) != null)
                             builder.append(s).append('\n');
                         final String page = builder.toString();
-                        LOGGER.info(page.substring(page.indexOf("{\"url\""), page.length() - 1));
-                        Optional<BrowserPayLoad> browserPayLoad = Common.deSerialize(page.substring(page.indexOf("{\"url\""), page.length() - 1), BrowserPayLoad.class);
+                        LOGGER.info(page.substring(page.indexOf("{\"action\""), page.length() - 1));
+                        Optional<BrowserPayLoad> browserPayLoad = Common.deSerialize(page.substring(page.indexOf("{\"action\""), page.length() - 1), BrowserPayLoad.class);
                         if (browserPayLoad.isPresent()) {
+                            BrowserPayLoad tempBrowserPayLoad = browserPayLoad.get();
+                            tempBrowserPayLoad.setSender();
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                                 Common.sendMessage("Loading Project", NotificationType.INFORMATION);
                                 loadProject();
@@ -85,8 +83,8 @@ public class MyApplicationComponent implements ApplicationComponent {
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                                 Common.sendMessage("Parsing Input", NotificationType.INFORMATION);
                                 try {
-                                    DomParser domParser = DomParserFactory.getParser(browserPayLoad.get().getSender());
-                                    Task task = domParser.parse(browserPayLoad.get().getHtmlBody());
+                                    DomParser domParser = DomParserFactory.getParser(browserPayLoad.get().getWebsiteName());
+                                    Task task = domParser.parse(browserPayLoad.get().getPayload().getMessage());
                                     initializeTask(task);
                                 } catch (ImpartialException e) {
                                     Common.sendMessage("Error occurred during parsing", NotificationType.ERROR);

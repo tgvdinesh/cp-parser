@@ -2,16 +2,17 @@ package com.parser.cp;
 
 import com.parser.cp.impl.CodeChefDomParserImpl;
 import com.parser.cp.impl.HackerRankDomParserImpl;
+import com.parser.cp.model.WebsiteName;
 
 public class DomParserFactory {
-    static DomParser getParser(String senderName) throws Exception {
-        switch (senderName) {
-            case "hackerrank":
+    public static DomParser getParser(WebsiteName websiteName) throws Exception {
+        switch (websiteName) {
+            case HACKER_RANK:
                 return new HackerRankDomParserImpl();
-            case "codechef":
+            case CODE_CHEF:
                 return new CodeChefDomParserImpl();
             default:
-                throw new Exception("Doesn't exist");
+                throw new Exception("Parser not supported yet");
         }
     }
 }
