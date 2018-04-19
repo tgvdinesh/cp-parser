@@ -1,9 +1,8 @@
 package com.parser.cp;
 
-import com.parser.cp.exception.ImpartialException;
-import com.parser.cp.exception.NotSupportedException;
-import com.parser.cp.model.Task;
+import com.parser.cp.exception.*;
+import com.parser.cp.model.payload.Task;
 
 public interface DomParser {
-    Task parse(String domAsString) throws ImpartialException, NotSupportedException;
+    Task parse(String domAsString) throws NotSupportedException;
 }

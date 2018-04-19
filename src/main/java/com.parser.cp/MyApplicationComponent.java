@@ -9,13 +9,10 @@ import com.intellij.openapi.application.TransactionGuard;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
-import com.parser.cp.exception.ImpartialException;
-import com.parser.cp.model.BrowserPayLoad;
-import com.parser.cp.model.Question;
-import com.parser.cp.model.Task;
-import com.parser.cp.util.Common;
-import com.parser.cp.util.Constant;
-import com.parser.cp.util.FileUtility;
+import com.parser.cp.exception.*;
+import com.parser.cp.model.*;
+import com.parser.cp.model.payload.Task;
+import com.parser.cp.util.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -71,11 +68,9 @@ public class MyApplicationComponent implements ApplicationComponent {
                         while ((s = bufferedReader.readLine()) != null)
                             builder.append(s).append('\n');
                         final String page = builder.toString();
-                        LOGGER.info(page.substring(page.indexOf("{\"action\""), page.length() - 1));
-                        Optional<BrowserPayLoad> browserPayLoad = Common.deSerialize(page.substring(page.indexOf("{\"action\""), page.length() - 1), BrowserPayLoad.class);
-                        if (browserPayLoad.isPresent()) {
-                            BrowserPayLoad tempBrowserPayLoad = browserPayLoad.get();
-                            tempBrowserPayLoad.setSender();
+                        LOGGER.info(page.substring(page.indexOf("{\"name\""), page.length() - 1));
+                        Optional<Task> optionalTask = Common.deSerialize(page.substring(page.indexOf("{\"name\""), page.length() - 1), Task.class);
+                        if (optionalTask.isPresent()) {
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                                 Common.sendMessage("Loading Project", NotificationType.INFORMATION);
                                 loadProject();
@@ -83,12 +78,9 @@ public class MyApplicationComponent implements ApplicationComponent {
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                                 Common.sendMessage("Parsing Input", NotificationType.INFORMATION);
                                 try {
-                                    DomParser domParser = DomParserFactory.getParser(browserPayLoad.get().getWebsiteName());
-                                    Task task = domParser.parse(browserPayLoad.get().getPayload().getMessage());
-                                    initializeTask(task);
-                                } catch (ImpartialException e) {
-                                    Common.sendMessage("Error occurred during parsing", NotificationType.ERROR);
-                                    LOGGER.severe("Error occurred during parsing : " + e.getLocalizedMessage());
+                                    /*DomParser domParser = DomParserFactory.getParser(optionalTask.get().getWebsiteName());*/
+                                    /*Task task = domParser.parse(optionalTask.get());*/
+                                    initializeTask(optionalTask.get());
                                 } catch (Exception parserDoNotExistException) {
                                     Common.sendMessage("We don't support the website yet", NotificationType.ERROR);
                                 }
@@ -177,29 +169,30 @@ public class MyApplicationComponent implements ApplicationComponent {
 
     }
 
-    private void initializeTask(Task task) {
+    private void initializeTask(Task task) throws IOException {
         /*1. Has the DOM parser completed it's task?*/
         /*1.1 If (it is still processing) then show loading*/
         /*1.2 If (it has already processed) then initialize the task*/
         /*2. User has completed testing. Now enable copy solution button*/
         Project[] openProjects = ProjectManager.getInstance().getOpenProjects();
-        Optional<Project> neededProject = Arrays.stream(openProjects).filter(currentProject -> currentProject.getName().equals("java-cp")).findFirst();
+        Optional<Project> neededProject = Arrays.stream(openProjects).filter(currentProject -> currentProject.getName().equals(Constant.PROJECT_NAME)).findFirst();
         if (neededProject.isPresent()) {
             Project project = neededProject.get();
             setProject(project);
-            task.getQuestions().forEach(question -> {
+            writeTestCases(task.getTests().toString());
+            /*task.getQuestions().forEach(question -> {
                 try {
                     initializeModule(question);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            });
+            });*/
         } else {
             LOGGER.severe("This should never happen.");
         }
     }
 
-    private void initializeModule(Question question) throws IOException {
+    /*private void initializeModule(Question question) throws IOException {
         if (project == null ||
                 project.getBaseDir() == null ||
                 project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY) == null ||
@@ -208,6 +201,16 @@ public class MyApplicationComponent implements ApplicationComponent {
         else {
             FileUtility.writeTextFile(project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY), Constant.INPUT_TEST_CASE_FILE, question.getInput());
             FileUtility.writeTextFile(project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY), Constant.OUTPUT_TEST_CASE_FILE, question.getOutput());
+        }
+    }*/
+
+    private void writeTestCases(String jsonString) throws IOException {
+        if (project == null ||
+                project.getBaseDir() == null ||
+                project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY) == null) {
+            throw new IOException("File not found ");
+        } else {
+            FileUtility.writeTextFile(project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY), Constant.IO, jsonString);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.parser.cp.model;
 
+import com.parser.cp.model.payload.Task;
 import com.parser.cp.util.FileUtility;
 import com.parser.cp.util.JacksonUtility;
 import org.junit.Assert;
@@ -11,21 +12,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class BrowserPayLoadTest {
+public class TaskTest {
     private static final String HACKER_RANK = "sampleInput.json";
-    private BrowserPayLoad browserPayLoad;
+    private Task task;
 
     @Before
     public void initializeValue() throws IOException {
         String hackerRankSample = FileUtility.readFromResourcesDirectory(HACKER_RANK, getClass().getClassLoader());
-        Optional<BrowserPayLoad> optionalBrowserPayLoad = JacksonUtility.jsonPtrExpr(hackerRankSample, "/hackerRank/pre/single", BrowserPayLoad.class);
-        optionalBrowserPayLoad.ifPresent(tempObject -> browserPayLoad = optionalBrowserPayLoad.get());
+        Optional<Task> optionalTask = JacksonUtility.jsonPtrExpr(hackerRankSample, "/hackerRank/single", Task.class);
+        optionalTask.ifPresent(tempObject -> task = optionalTask.get());
     }
 
     @Test
     public void deSerializationSuccessAndSenderValidation() {
-        browserPayLoad.setSender();
-        Assert.assertNotNull("Sender should be present", browserPayLoad.getWebsiteName());
+        Assert.assertNotNull("Sender should be present", task.getWebsiteName());
     }
 
     @Test
@@ -35,9 +35,8 @@ public class BrowserPayLoadTest {
         supportedWebsiteNameMap.put(WebsiteName.HACKER_RANK, "https://www.hackerrank.com/");
 
         supportedWebsiteNameMap.forEach((key, websiteURL) -> {
-            browserPayLoad.setUrl(websiteURL);
-            browserPayLoad.setSender();
-            Assert.assertEquals("Should be equal", key, browserPayLoad.getWebsiteName());
+            task.setUrl(websiteURL);
+            Assert.assertEquals("Should be equal", key, task.getWebsiteName());
         });
     }
 }

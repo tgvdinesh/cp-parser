@@ -1,8 +1,7 @@
 package com.parser.cp.impl;
 
 import com.parser.cp.DomParser;
-import com.parser.cp.exception.ImpartialException;
-import com.parser.cp.model.Task;
+import com.parser.cp.model.payload.Task;
 import com.parser.cp.util.Common;
 
 import java.util.LinkedList;
@@ -20,8 +19,9 @@ public class CodeChefDomParserImpl implements DomParser {
     }
 
     @Override
-    public Task parse(String domAsString) throws ImpartialException {
-        return Common.getTask(domAsString, INPUT_SELECTORS, OUTPUT_SELECTORS);
+    public Task parse(String domAsString)  {
+        /*return Common.getTask(domAsString, INPUT_SELECTORS, OUTPUT_SELECTORS);*/
+        return null;
     }
 
 

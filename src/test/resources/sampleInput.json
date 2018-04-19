@@ -1,32 +1,118 @@
 {
   "hackerRank": {
-    "pre": {
-      "single": {
-        "action": 4,
-        "payload": {
-          "message": "kattis\n      <div id: \"contest_time\">\n        <h2 class=\"title\">HackerRank</h2>\n      </div>\n\n      <div class=\"headline-wrapper\"><h1>Day 5: Loops</h1></div>\n\n      <div class=\"text-center\"><h1>Day 5: Loops</h1></div>\n\n      \n      <table class=\"sample\" summary=\"sample data\">\n        <pre>2\n</pre>\n        <pre>2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20\n</pre>\n      </table>\n    \n\n      <p><strong>Memory limit: </strong>512 MB</p>\n    "
-        },
-        "url": "https://www.hackerrank.com/challenges/30-loops/problem"
+    "single": {
+      "group": "HackerRank - Tutorials - 30 Days of Code",
+      "input": {
+        "type": "stdin"
       },
-      "multiple": {
-        "action": 4,
-        "payload": {
-          "message": "kattis\n      <div id: \"contest_time\">\n        <h2 class=\"title\">HackerRank</h2>\n      </div>\n\n      <div class=\"headline-wrapper\"><h1>Day 3: Intro to Conditional Statements</h1></div>\n\n      <div class=\"text-center\"><h1>Day 3: Intro to Conditional Statements</h1></div>\n\n      \n      <table class=\"sample\" summary=\"sample data\">\n        <pre>3\n</pre>\n        <pre>Weird\n</pre>\n      </table>\n    \n      <table class=\"sample\" summary=\"sample data\">\n        <pre>24\n</pre>\n        <pre>Not Weird\n</pre>\n      </table>\n    \n\n      <p><strong>Memory limit: </strong>512 MB</p>\n    "
+      "languages": {
+        "java": {
+          "mainClass": "Main",
+          "taskClass": "Day5Loops"
+        }
+      },
+      "memoryLimit": 512,
+      "name": "Day 5: Loops",
+      "output": {
+        "type": "stdout"
+      },
+      "testType": "single",
+      "tests": [
+        {
+          "input": "2\n",
+          "output": "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20\n"
+        }
+      ],
+      "timeLimit": 4000,
+      "url": "https://www.hackerrank.com/challenges/30-loops/problem"
+    },
+    "multiple": {
+      "group": "HackerRank - Tutorials - 30 Days of Code",
+      "input": {
+        "type": "stdin"
+      },
+      "languages": {
+        "java": {
+          "mainClass": "Main",
+          "taskClass": "Day3IntroToConditionalStatements"
+        }
+      },
+      "memoryLimit": 512,
+      "name": "Day 3: Intro to Conditional Statements",
+      "output": {
+        "type": "stdout"
+      },
+      "testType": "single",
+      "tests": [
+        {
+          "input": "3\n",
+          "output": "Weird\n"
         },
-        "url": "https://www.hackerrank.com/challenges/30-conditional-statements/problem"
-      }
+        {
+          "input": "24\n",
+          "output": "Not Weird\n"
+        }
+      ],
+      "timeLimit": 4000,
+      "url": "https://www.hackerrank.com/challenges/30-conditional-statements/problem"
     }
   },
   "codeChef": {
-    "pre": {
-      "single": {
-        "action": 4,
-        "payload": {
-          "message": "kattis\n      <div id=\"contest_time\">\n        <h2 class=\"title\">HackerRank - Tutorials - 30 Days of Code</h2>\n      </div>\n\n      <div class=\"headline-wrapper\"><h1>Day 5: Loops</h1></div>\n\n      <div class=\"text-center\"><h1>Day 5: Loops</h1></div>\n\n      \n      <table class=\"sample\" summary=\"sample data\">\n        <pre>2\n</pre>\n        <pre>2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20\n</pre>\n      </table>\n    \n\n      <p><strong>Memory limit: </strong>512 MB</p>\n    "
-        },
-        "url": "https://www.hackerrank.com/challenges/30-loops/problem"
+    "single": {
+      "group": "HackerRank - Tutorials - 30 Days of Code",
+      "input": {
+        "type": "stdin"
       },
-      "multiple": {}
+      "languages": {
+        "java": {
+          "mainClass": "Main",
+          "taskClass": "Day5Loops"
+        }
+      },
+      "memoryLimit": 512,
+      "name": "Day 5: Loops",
+      "output": {
+        "type": "stdout"
+      },
+      "testType": "single",
+      "tests": [
+        {
+          "input": "2\n",
+          "output": "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\n2 x 6 = 12\n2 x 7 = 14\n2 x 8 = 16\n2 x 9 = 18\n2 x 10 = 20\n"
+        }
+      ],
+      "timeLimit": 4000,
+      "url": "https://www.hackerrank.com/challenges/30-loops/problem"
+    },
+    "multiple": {
+      "group": "HackerRank - Tutorials - 30 Days of Code",
+      "input": {
+        "type": "stdin"
+      },
+      "languages": {
+        "java": {
+          "mainClass": "Main",
+          "taskClass": "Day3IntroToConditionalStatements"
+        }
+      },
+      "memoryLimit": 512,
+      "name": "Day 3: Intro to Conditional Statements",
+      "output": {
+        "type": "stdout"
+      },
+      "testType": "single",
+      "tests": [
+        {
+          "input": "3\n",
+          "output": "Weird\n"
+        },
+        {
+          "input": "24\n",
+          "output": "Not Weird\n"
+        }
+      ],
+      "timeLimit": 4000,
+      "url": "https://www.hackerrank.com/challenges/30-conditional-statements/problem"
     }
   }
 }
