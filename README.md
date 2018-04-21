@@ -37,3 +37,6 @@ DOM Parser for CP
     
      If you find my plugin helpful, donate me using [Donate with PayPal](https://www.paypal.me/tgvdinesh)
      ```
+
+# Reference
+1. [Getting Started with Gradle](http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/prerequisites.html)
