@@ -24,6 +24,6 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      Contains support for multiple websites.<br>
+      <em>Integraed CI</em>"""
 }
