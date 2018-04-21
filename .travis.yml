@@ -9,6 +9,7 @@ env:
   - GRADLE_USER_HOME=`pwd`/.gradle
 cache:
  directories:
+ - ~/.gradle
  - $HOME/.gradle/caches/
  - $HOME/.gradle/wrapper/
 before_deploy:
@@ -18,8 +19,11 @@ before_deploy:
       - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 before_script:
     - chmod +x gradlew
-script: echo "Deploying to GitHub releases ..."
-script: gradle buildPlugin
+script:
+- echo "Deploying to GitHub releases ..."
+- echo $CI_HOME
+- cd $CI_HOME && ls -la
+- gradle buildPlugin
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
