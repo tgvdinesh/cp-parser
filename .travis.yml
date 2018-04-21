@@ -1,1 +1,15 @@
 language: java
+java:
+  - 1.6
+  - 1.7
+  - 1.8
+before_deploy:
+      # Set up git user name and tag this commit
+      - git config --local user.name "tgvdinesh"
+      - git config --local user.email "tgvdinesh@gmail.com"
+      - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+script: echo "Deploying to GitHub releases ..."
+deploy:
+  provider: releases
+  api_key: $GITHUB_OAUTH_TOKEN
+  skip_cleanup: true

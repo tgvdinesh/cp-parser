@@ -14,6 +14,7 @@ DOM Parser for CP
 - [x] Implement parser for [Code Chef](https://www.codechef.com/)
 - [x] ```browserPayLoad.setSender();``` Should be deprecated. During binding of string to json we must run this logic
 - [ ] [Continuous integration](https://github.com/marketplace/category/continuous-integration)
+= [ ] [Travis-CI GitHub Releases Uploading](https://docs.travis-ci.com/user/deployment/releases/)
 - [ ] Add property file from where CSS Selectors should be read from
 - [ ] Add a task tracker for parser project like Jira
 - [ ] [Publish IntelliJ plugin](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/publishing_plugin.html)
