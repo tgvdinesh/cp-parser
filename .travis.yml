@@ -24,6 +24,8 @@ script:
  - gradle buildPlugin
  - echo "Post Build"
  - cd $CI_HOME/build/distributions && pwd && ls -la
+ - echo "The file which is going to be uploaded is!"
+ - ls $CI_HOME/build/distributions/
 before_deploy:
      # Set up git user name and tag this commit
      - git config --local user.name $GIT_AUTHOR_NAME
@@ -33,4 +35,4 @@ deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
   skip_cleanup: true
-  file: $CI_HOME/build/distributions/*.zip
+  file: $CI_HOME/build/distributions/cp-parser-1.1-SNAPSHOT.zip
