@@ -19,7 +19,6 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key: $GITHUB_OAUTH_TOKEN
-    secure:
   file_glob: true
   file: $CI_HOME/build/distributions/*.zip
   on:
