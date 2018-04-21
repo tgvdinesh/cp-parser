@@ -18,4 +18,4 @@ deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
   skip_cleanup: true
-  file: $HOME/build/distributions/*.zip
+  file: $TRAVIS_BUILD_DIR/distributions/*.zip
