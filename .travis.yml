@@ -3,6 +3,10 @@ java:
   - 1.6
   - 1.7
   - 1.8
+env:
+  global:
+  - CI_HOME=`pwd`
+  - GRADLE_USER_HOME=`pwd`/.gradle
 cache:
  directories:
  - $HOME/.gradle/caches/
@@ -12,10 +16,12 @@ before_deploy:
       - git config --local user.name "tgvdinesh"
       - git config --local user.email "tgvdinesh@gmail.com"
       - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+before_script:
+    - chmod +x gradlew
 script: echo "Deploying to GitHub releases ..."
 script: gradle buildPlugin
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
   skip_cleanup: true
-  file: $TRAVIS_BUILD_DIR/distributions/*.zip
+  file: $CI_HOME/build/distributions/*.zip
