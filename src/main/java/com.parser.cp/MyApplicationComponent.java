@@ -9,10 +9,12 @@ import com.intellij.openapi.application.TransactionGuard;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
-import com.parser.cp.exception.*;
-import com.parser.cp.model.*;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.parser.cp.model.payload.Task;
-import com.parser.cp.util.*;
+import com.parser.cp.util.Common;
+import com.parser.cp.util.Constant;
+import com.parser.cp.util.FileUtility;
+import com.parser.cp.util.JacksonUtility;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -179,7 +181,7 @@ public class MyApplicationComponent implements ApplicationComponent {
         if (neededProject.isPresent()) {
             Project project = neededProject.get();
             setProject(project);
-            writeTestCases(task.getTests().toString());
+            writeTestCases(JacksonUtility.deSerialize(task.getTests(), true));
             /*task.getQuestions().forEach(question -> {
                 try {
                     initializeModule(question);
@@ -205,12 +207,13 @@ public class MyApplicationComponent implements ApplicationComponent {
     }*/
 
     private void writeTestCases(String jsonString) throws IOException {
+        VirtualFile testCaseDirectory = project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY);
         if (project == null ||
                 project.getBaseDir() == null ||
-                project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY) == null) {
+                testCaseDirectory == null) {
             throw new IOException("File not found ");
         } else {
-            FileUtility.writeTextFile(project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY), Constant.IO, jsonString);
+            FileUtility.writeTextFile(testCaseDirectory, Constant.IO, jsonString);
         }
     }
 
