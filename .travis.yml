@@ -1,8 +1,4 @@
 language: java
-java:
-  - 1.6
-  - 1.7
-  - 1.8
 sudo: required
 cache:
  directories:
@@ -12,9 +8,9 @@ cache:
  - $HOME/.gradle/
 env:
   global:
-  - GH_PROJECT_NAME: cp-parser
-  - GIT_AUTHOR_NAME: TravisCI
-  - GIT_AUTHOR_EMAIL: noreply@travis-ci.org
+  - GH_PROJECT_NAME=cp-parser
+  - GIT_AUTHOR_NAME=TravisCI
+  - GIT_AUTHOR_EMAIL=noreply@travis-ci.org
   - CI_HOME=`pwd`
   - GRADLE_USER_HOME=`pwd`/.gradle
 
