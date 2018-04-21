@@ -3,26 +3,21 @@ DOM Parser for CP
 
 
 # Setup
-1. Download [IntelliJ Plugin](https://github.com/tgvdinesh/cp-parser/releases/tag/1.0)
+1. Download [IntelliJ Plugin](http://plugins.jetbrains.com/plugin/10652-competitive-program-parser)
 2. Download [Chrome Plugin](https://github.com/jmerle/chelper-companion/tree/feature/universal)
 3. [Manually upload Chrome plugin](https://developer.chrome.com/extensions/getstarted#manifest)
 4. [Manually upload Intellij Plugin](https://www.jetbrains.com/help/idea/installing-a-plugin-from-disk.html)
 
 
 # Road Map
-- [x] Bind Json to POJO
-- [x] Implement parser for [Code Chef](https://www.codechef.com/)
-- [x] ```browserPayLoad.setSender();``` Should be deprecated. During binding of string to json we must run this logic
-- [x] [Continuous integration](https://github.com/marketplace/category/continuous-integration)
-- [x] [Travis-CI GitHub Releases Uploading](https://docs.travis-ci.com/user/deployment/releases/)
-- [ ] Add property file from where CSS Selectors should be read from
+- [X] Implement parser for multiple sample input/output [Sample 1](https://www.hackerrank.com/challenges/30-conditional-statements/problem)
+- [X] Implement parser for all Competitive Programming websites
+- [X] [Publish IntelliJ plugin](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/publishing_plugin.html)
+- [X] If possible display build status with [IntelliJ](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
+- [ ] Add property file
 - [ ] Add a task tracker for parser project like Jira
-- [ ] [Publish IntelliJ plugin](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/publishing_plugin.html)
-- [ ] Implement parser for multiple sample input/output [Sample 1](https://www.hackerrank.com/challenges/30-conditional-statements/problem)
-- [ ] Implement parser for all Competitive Programming websites
-- [ ] Show [Progress Indicator](https://github.com/JetBrains/intellij-community/search?utf8=%E2%9C%93&q=ProgressIndicator&type=)
 - [ ] Implement quality assurance
-- [ ] If possible display build status with [IntelliJ](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
+- [ ] Show [Progress Indicator](https://github.com/JetBrains/intellij-community/search?utf8=%E2%9C%93&q=ProgressIndicator&type=)
 - [ ] RECENT CHANGE NOTES - template integration
     ```
     .ignore plugin updated to v2.6.0 
@@ -40,4 +35,6 @@ DOM Parser for CP
      ```
 - [ ] ```patchPluginXml > changeNotes``` in *build.gradle* should be loaded from template 
 # Reference
-1. [Getting Started with Gradle](http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/prerequisites.html)
+1. [IntelliJ Platform SDK DevGuide](http://www.jetbrains.org/intellij/sdk/docs/welcome.html)
+2. [Chrome plugin](https://github.com/jmerle/chelper-companion/tree/feature/universal)
+3. [IntelliJ Plugin](http://plugins.jetbrains.com/plugin/10652-competitive-program-parser)
