@@ -14,14 +14,12 @@ env:
 
 before_script:
     - chmod +x gradlew
-
+script:
+ - gradle buildPlugin
+ - echo "Post Build"
+ - cd $CI_HOME/build/distributions && pwd && ls -la
 deploy:
   provider: releases
-  skip_cleanup: true
   api_key: $GITHUB_OAUTH_TOKEN
-  file_glob: true
+  skip_cleanup: true
   file: $CI_HOME/build/distributions/*.zip
-  on:
-    repo: tgvdinesh/cp-parser
-    tags: true
-    all_branches: true
