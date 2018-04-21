@@ -146,6 +146,7 @@ public class MyApplicationComponent implements ApplicationComponent {
      * @return Returns false if user cancels the action
      */
     private boolean actionDialog() {
+        Common.sendMessage("Kindly open " + Constant.PROJECT_NAME + " project. If you don't have the project <a href='https://github.com/tgvdinesh/java-template'>clone it from Github Repository</a>", NotificationType.ERROR);
         return false;
     }
 
