@@ -1,4 +1,4 @@
-# cp-parser [![Build Status](https://travis-ci.org/tgvdinesh/cp-parser.svg?branch=new-template-adaptation)](https://travis-ci.org/tgvdinesh/cp-parser)
+# cp-parser [![Build Status](https://travis-ci.org/tgvdinesh/cp-parser.svg?branch=master)](https://travis-ci.org/tgvdinesh/cp-parser)
 DOM Parser for CP
 
 
