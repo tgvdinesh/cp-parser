@@ -21,9 +21,16 @@ dependencies {
 
 intellij {
     version '2017.3.5'
+    pluginName 'CP Parser'
+    intellij.updateSinceUntilBuild false
 }
 patchPluginXml {
     changeNotes """
       Contains support for multiple websites.<br>
       <em>Integraed CI</em>"""
+}
+
+publish {
+    pluginId '10652-competitive-program-parser'
+    // (optional) apply from: "YOUR_CUSTOM_PROPERTIES_FILE.properties"
 }

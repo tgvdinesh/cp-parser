@@ -23,7 +23,7 @@ DOM Parser for CP
 - [ ] Show [Progress Indicator](https://github.com/JetBrains/intellij-community/search?utf8=%E2%9C%93&q=ProgressIndicator&type=)
 - [ ] Implement quality assurance
 - [ ] If possible display build status with [IntelliJ](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-- [ ] Show notification message upon each update in IntelliJ
+- [ ] RECENT CHANGE NOTES - template integration
     ```
     .ignore plugin updated to v2.6.0 
      If you find my plugin helpful, [Donate with PayPal](https://www.paypal.me/tgvdinesh)
@@ -38,6 +38,6 @@ DOM Parser for CP
     
      If you find my plugin helpful, donate me using [Donate with PayPal](https://www.paypal.me/tgvdinesh)
      ```
-
+- [ ] ```patchPluginXml > changeNotes``` in *build.gradle* should be loaded from template 
 # Reference
 1. [Getting Started with Gradle](http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system/prerequisites.html)
