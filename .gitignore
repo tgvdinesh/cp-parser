@@ -137,3 +137,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+/gradle.properties
+gradle.properties
+src/test/java/com/parser/cp/impl/
