@@ -1,31 +1,25 @@
 language: java
-java:
-  - 1.6
-  - 1.7
-  - 1.8
+jdk: oraclejdk8
+sudo: required
 env:
   global:
+  - GH_PROJECT_NAME: cp-parser
+  - GIT_AUTHOR_NAME: TravisCI
+  - GIT_AUTHOR_EMAIL: noreply@travis-ci.org
   - CI_HOME=`pwd`
   - GRADLE_USER_HOME=`pwd`/.gradle
-cache:
- directories:
- - ~/.gradle
- - $HOME/.gradle/caches/
- - $HOME/.gradle/wrapper/
-before_deploy:
-      # Set up git user name and tag this commit
-      - git config --local user.name "tgvdinesh"
-      - git config --local user.email "tgvdinesh@gmail.com"
-      - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+
 before_script:
     - chmod +x gradlew
-script:
-- echo "Deploying to GitHub releases ..."
-- echo $CI_HOME
-- cd $CI_HOME && ls -la
-- gradle buildPlugin
+
 deploy:
   provider: releases
-  api_key: $GITHUB_OAUTH_TOKEN
   skip_cleanup: true
+  api_key: $GITHUB_OAUTH_TOKEN
+    secure:
+  file_glob: true
   file: $CI_HOME/build/distributions/*.zip
+  on:
+    repo: tgvdinesh/cp-parser
+    tags: true
+    all_branches: true
