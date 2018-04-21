@@ -21,7 +21,7 @@ dependencies {
 
 intellij {
     version '2017.3.5'
-    pluginName 'CP Parser'
+    pluginName 'cp-parser'
     updateSinceUntilBuild false
     publish {
         pluginId '10652-competitive-program-parser'
