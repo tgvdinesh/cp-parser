@@ -25,7 +25,7 @@ public class Common {
     }
 
     public static void sendMessage(String message, NotificationType notificationType) {
-        Notifications.Bus.notify(new Notification("CPParser", "CP Parser", message, notificationType));
+        Notifications.Bus.notify(new Notification("CPParser", "Mind Storm", message, notificationType));
     }
 
 

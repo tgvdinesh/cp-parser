@@ -1,4 +1,4 @@
-# cp-parser [![Build Status](https://travis-ci.org/tgvdinesh/cp-parser.svg?branch=master)](https://travis-ci.org/tgvdinesh/cp-parser)
+# mind-storm [![Build Status](https://travis-ci.org/tgvdinesh/mind-storm.svg?branch=master)](https://travis-ci.org/tgvdinesh/mind-storm)
 DOM Parser for CP
 
 

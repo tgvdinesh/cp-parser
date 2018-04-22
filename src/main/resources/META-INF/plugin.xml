@@ -1,12 +1,24 @@
 <idea-plugin>
-    <id>com.parser.cp.cp-parser</id>
+    <id>com.parser.cp.mind-storm</id>
     <name>Competitive Program Parser</name>
-    <vendor email="tgvdinesh@gmail.com" url="https://github.com/tgvdinesh/cp-parser">CP Parser</vendor>
+    <vendor email="tgvdinesh@gmail.com" url="https://github.com/tgvdinesh/mind-storm">Mind Storm</vendor>
 
     <description><![CDATA[
-    A plugin for competitive programming<br>
-    You need to install unreleased version of <a href="https://github.com/jmerle/chelper-companion/tree/feature/universal#packaging">chelper-companion</a>
-    <em>This plugin is in beta stage.</em>
+    Competitive Programming parser - Mind Sport
+
+    You should have Mind Sport IntelliJ Plugin installed for this to work.
+
+    Pre-requisites:
+    1. Install Mind sport IntelliJ Plugin
+    2. Open https://github.com/tgvdinesh/java-template project in IntelliJ
+
+    Steps:
+    1. Open https://github.com/tgvdinesh/java-template local project in IntelliJ.
+    2. Open Competitive programming challenge. Eg: Hacker Rank, Code Chef, etc. The list of supported websites are given here.  https://github.com/tgvdinesh/chelper-companion#supported-websites
+    3. Click on Mind sport chrome extension shown on top of chrome browser.
+    4. That's all. You'll now see that the plugin will have replaced your io.json file and you are ready to solve the problem.
+
+    PS: You should have opened java-template project in IntelliJ or it should at least be open previously for this plugin to work.
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
