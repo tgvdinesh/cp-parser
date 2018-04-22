@@ -92,6 +92,7 @@ public class MyApplicationComponent implements ApplicationComponent {
                         /*1. Parse DOM in background. This means
                          * 1.1 If any other project is open then prompt user to load our module*/
                     } catch (IOException e) {
+                        Common.sendMessage("Input from plugin : \r\n" + page + "\r\n Error : " + e.getLocalizedMessage(), NotificationType.ERROR);
                         LOGGER.log(Level.SEVERE, "Error occurred during socket acceptance ", e);
                         return;
                     }
