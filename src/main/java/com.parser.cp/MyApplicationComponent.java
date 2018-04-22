@@ -72,6 +72,11 @@ public class MyApplicationComponent implements ApplicationComponent {
                         while ((s = bufferedReader.readLine()) != null)
                             builder.append(s).append('\n');
                         page = builder.toString();
+                        if (page.equals("")) {
+                            Common.sendMessage("Page :" + page, NotificationType.INFORMATION);
+                            return;
+                        }
+                        Common.sendMessage("Page :" + page, NotificationType.INFORMATION);
                         LOGGER.info(page.substring(page.indexOf(Constant.JSON), page.length() - 1));
                         Optional<Task> optionalTask = Common.deSerialize(page.substring(page.indexOf(Constant.JSON), page.length() - 1), Task.class);
                         if (optionalTask.isPresent()) {
