@@ -72,6 +72,8 @@ public class MyApplicationComponent implements ApplicationComponent {
                         while ((s = bufferedReader.readLine()) != null)
                             builder.append(s).append('\n');
                         page = builder.toString();
+                        socket.close();
+                        bufferedReader.close();
                         if (page.equals("")) {
                             Common.sendMessage("Page :" + page, NotificationType.INFORMATION);
                             return;
