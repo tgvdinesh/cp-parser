@@ -1,12 +1,11 @@
-# mind-storm [![Build Status](https://travis-ci.org/tgvdinesh/mind-storm.svg?branch=master)](https://travis-ci.org/tgvdinesh/mind-storm)
+# mind-sport [![Build Status](https://travis-ci.org/tgvdinesh/mind-sport.svg?branch=master)](https://travis-ci.org/tgvdinesh/mind-sport)
 DOM Parser for CP
 
 
 # Setup
-1. Download [IntelliJ Plugin](http://plugins.jetbrains.com/plugin/10652-competitive-program-parser)
-2. Download [Chrome Plugin](https://github.com/jmerle/chelper-companion/tree/feature/universal)
-3. [Manually upload Chrome plugin](https://developer.chrome.com/extensions/getstarted#manifest)
-4. [Manually upload Intellij Plugin](https://www.jetbrains.com/help/idea/installing-a-plugin-from-disk.html)
+1. Install [Mind Sport - IntelliJ Plugin](http://plugins.jetbrains.com/plugin/10652-competitive-program-parser)
+2. Install [Mind Sport - Chrome Plugin](https://chrome.google.com/webstore/detail/mind-sport/epnaneaijfpjdfpbbnllhcflnammlcnh)
+3. Clone and open [Java Template](https://github.com/tgvdinesh/mind-sport)
 
 
 # Road Map
