@@ -37,6 +37,7 @@ public class MyApplicationComponent implements ApplicationComponent {
     private ServerSocket serverSocket;
     private Project project;
     private String page;
+    private boolean projectLoaded = false;
 
     private void setProject(Project project) {
         this.project = project;
@@ -76,7 +77,8 @@ public class MyApplicationComponent implements ApplicationComponent {
                         if (optionalTask.isPresent()) {
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                                 Common.sendMessage("Loading Project", NotificationType.INFORMATION);
-                                loadProject();
+                                if (!projectLoaded)
+                                    loadProject();
                             });
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                                 Common.sendMessage("Parsing Input", NotificationType.INFORMATION);
@@ -116,6 +118,8 @@ public class MyApplicationComponent implements ApplicationComponent {
             try {
                 if (!openFromRecent()) {
                     actionDialog();
+                } else {
+                    projectLoaded = true;
                 }
             } catch (Exception e) {
                 LOGGER.info("Needed project was not found in recent history. Load as new project from template");
@@ -124,7 +128,7 @@ public class MyApplicationComponent implements ApplicationComponent {
         } else {
             Optional<Project> neededProject = Arrays.stream(openProjects).filter(currentProject -> currentProject.getName().equals(Constant.PROJECT_NAME)).findFirst();
             if (!neededProject.isPresent()) {
-                Common.sendMessage("java-cp project is not open", NotificationType.ERROR);
+                Common.sendMessage(Constant.PROJECT_NAME + " project is not open", NotificationType.ERROR);
                 /*LOGGER.info("Project is already open");
                 try {
                     openFromRecent();
@@ -133,6 +137,7 @@ public class MyApplicationComponent implements ApplicationComponent {
                     createProjectFromTemplate();
                 }*/
             } else {
+                projectLoaded = true;
                 LOGGER.info("We have the project open already. Load data in it.");
             }
         }
