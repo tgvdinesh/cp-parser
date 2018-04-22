@@ -76,18 +76,16 @@ public class MyApplicationComponent implements ApplicationComponent {
                         Optional<Task> optionalTask = Common.deSerialize(page.substring(page.indexOf(Constant.JSON), page.length() - 1), Task.class);
                         if (optionalTask.isPresent()) {
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
-                                Common.sendMessage("Loading Project", NotificationType.INFORMATION);
                                 if (!projectLoaded)
                                     loadProject();
                             });
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
-                                Common.sendMessage("Parsing Input", NotificationType.INFORMATION);
                                 try {
                                     /*DomParser domParser = DomParserFactory.getParser(optionalTask.get().getWebsiteName());*/
                                     /*Task task = domParser.parse(optionalTask.get());*/
                                     initializeTask(optionalTask.get());
                                 } catch (Exception parserDoNotExistException) {
-                                    Common.sendMessage("We don't support the website yet", NotificationType.ERROR);
+                                    Common.sendMessage("Error occurred during initialization of task. Error : " + parserDoNotExistException.getLocalizedMessage(), NotificationType.ERROR);
                                 }
                             });
                         }
@@ -101,7 +99,7 @@ public class MyApplicationComponent implements ApplicationComponent {
             }).start();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error occurred ", e);
-            Common.sendMessage("Input from plugin : " + page, NotificationType.ERROR);
+            Common.sendMessage("Input from plugin : \r\n" + page + "\r\n Error : " + e.getLocalizedMessage(), NotificationType.ERROR);
         }
         /*VirtualFile userHomeDir = VfsUtil.getUserHomeDir();
         userHomeDir.findChild("java-cp");*/
@@ -111,6 +109,7 @@ public class MyApplicationComponent implements ApplicationComponent {
      * Responsible for opening the project which is created from custom competitive programming template.
      */
     private void loadProject() {
+        Common.sendMessage("Loading Project", NotificationType.INFORMATION);
         /*1. Check if project already exists*/
         Project[] openProjects = ProjectManager.getInstance().getOpenProjects();
 
