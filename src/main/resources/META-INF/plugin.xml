@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.parser.cp.mind-sport</id>
-    <name>Competitive Program Parser</name>
+    <name>Mind Sport</name>
     <vendor email="tgvdinesh@gmail.com" url="https://github.com/tgvdinesh/mind-sport">Mind Sport</vendor>
 
     <description><![CDATA[
