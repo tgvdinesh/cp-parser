@@ -6,4 +6,5 @@ public class Constant {
     public static final String INPUT_TEST_CASE_FILE = "input.txt";
     public static final String OUTPUT_TEST_CASE_FILE = "output.txt";
     public static final String IO = "io.json";
+    public static final String JSON = "{\"name\"";
 }

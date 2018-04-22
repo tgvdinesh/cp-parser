@@ -36,6 +36,7 @@ public class MyApplicationComponent implements ApplicationComponent {
     private static final int PORT = 4243;
     private ServerSocket serverSocket;
     private Project project;
+    private String page;
 
     private void setProject(Project project) {
         this.project = project;
@@ -69,9 +70,9 @@ public class MyApplicationComponent implements ApplicationComponent {
                         String s;
                         while ((s = bufferedReader.readLine()) != null)
                             builder.append(s).append('\n');
-                        final String page = builder.toString();
-                        LOGGER.info(page.substring(page.indexOf("{\"name\""), page.length() - 1));
-                        Optional<Task> optionalTask = Common.deSerialize(page.substring(page.indexOf("{\"name\""), page.length() - 1), Task.class);
+                        page = builder.toString();
+                        LOGGER.info(page.substring(page.indexOf(Constant.JSON), page.length() - 1));
+                        Optional<Task> optionalTask = Common.deSerialize(page.substring(page.indexOf(Constant.JSON), page.length() - 1), Task.class);
                         if (optionalTask.isPresent()) {
                             TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                                 Common.sendMessage("Loading Project", NotificationType.INFORMATION);
@@ -98,6 +99,7 @@ public class MyApplicationComponent implements ApplicationComponent {
             }).start();
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Error occurred ", e);
+            Common.sendMessage("Input from plugin : " + page, NotificationType.ERROR);
         }
         /*VirtualFile userHomeDir = VfsUtil.getUserHomeDir();
         userHomeDir.findChild("java-cp");*/
