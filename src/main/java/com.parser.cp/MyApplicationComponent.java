@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Arrays;
@@ -72,6 +73,10 @@ public class MyApplicationComponent implements ApplicationComponent {
                         while ((s = bufferedReader.readLine()) != null)
                             builder.append(s).append('\n');
                         page = builder.toString();
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                        //write object to Socket
+                        objectOutputStream.writeObject("ack");
+                        objectOutputStream.close();
                         socket.close();
                         bufferedReader.close();
                         if (page.equals("")) {
