@@ -115,7 +115,6 @@ public class MyApplicationComponent implements ApplicationComponent {
      * Responsible for opening the project which is created from custom competitive programming template.
      */
     private void loadProject() {
-        Common.sendMessage("Loading Project", NotificationType.INFORMATION);
         /*1. Check if project already exists*/
         Project[] openProjects = ProjectManager.getInstance().getOpenProjects();
 
