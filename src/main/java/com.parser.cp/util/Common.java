@@ -12,8 +12,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 public class Common {
+    private static final Logger LOGGER = Logger.getLogger(Common.class.getName());
 
     private static Optional<Elements> getElement(Document document, List<String> filterList) {
         for (String filter : filterList) {
@@ -25,7 +27,13 @@ public class Common {
     }
 
     public static void sendMessage(String message, NotificationType notificationType) {
-        Notifications.Bus.notify(new Notification("CPParser", "Mind Sport", message, notificationType));
+        Notifications.Bus.notify(new Notification("Mind Sport", "Mind Sport", message, notificationType));
+    }
+
+    public static void sendErrorMessage(String message, Exception e) {
+        String errorMessage = message + "\r\nError : " + e.getLocalizedMessage();
+        LOGGER.severe(errorMessage);
+        Notifications.Bus.notify(new Notification("Mind Sport", "Mind Sport", errorMessage, NotificationType.ERROR));
     }
 
 

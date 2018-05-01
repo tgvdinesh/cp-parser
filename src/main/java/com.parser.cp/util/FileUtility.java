@@ -6,8 +6,7 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.util.logging.Logger;
 
@@ -30,27 +29,33 @@ public class FileUtility {
         }
     }
 
-    public static VirtualFile writeTextFile(@NotNull final VirtualFile location, final String fileName, final String fileContent) throws IOException {
+    public static void writeTextFile(@NotNull final VirtualFile location, final String fileName, final String fileContent) {
         ApplicationManager.getApplication().runWriteAction(() -> {
-            OutputStream stream = null;
+            VirtualFile file;
             try {
-                VirtualFile file = location.findOrCreateChildData(null, fileName);
-                stream = file.getOutputStream(null);
-                stream.write(fileContent.getBytes(Charset.forName("UTF-8")));
-            } catch (IOException ignored) {
-                LOGGER.severe("Error occurred " + ignored.getLocalizedMessage());
-            } finally {
-                if (stream != null) {
-                    try {
-                        stream.close();
-                    } catch (IOException ignored) {
-                    }
+                file = location.findOrCreateChildData(null, fileName);
+                try (OutputStream stream = file.getOutputStream(null)) {
+                    stream.write(fileContent.getBytes(Charset.forName("UTF-8")));
+                } catch (IOException ignored) {
+                    Common.sendErrorMessage("Writing file failed", ignored);
                 }
+            } catch (IOException ioException) {
+                Common.sendErrorMessage("Failed to find the file.", ioException);
             }
         });
-        if (location == null) {
-            return null;
+    }
+
+    public static String readFromResourcesDirectory(String filePath, ClassLoader classLoader)
+            throws IOException {
+        InputStream inputStream = classLoader.getResourceAsStream(filePath);
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br
+                     = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
         }
-        return location.findChild(fileName);
+        return resultStringBuilder.toString();
     }
 }

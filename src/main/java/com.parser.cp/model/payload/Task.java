@@ -1,15 +1,13 @@
 
 package com.parser.cp.model.payload;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.parser.cp.model.WebsiteName;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -46,8 +44,6 @@ public class Task {
     private long timeLimit;
     @JsonProperty("url")
     private String url;
-    @JsonIgnore
-    private WebsiteName websiteName;
 
     /**
      * No args constructor for use in serialization
@@ -179,34 +175,10 @@ public class Task {
     @JsonProperty("url")
     public void setUrl(String url) {
         this.url = url;
-        setWebsiteName();
-    }
-
-    @JsonIgnore
-    public WebsiteName getWebsiteName() {
-        return websiteName;
-    }
-
-    @JsonIgnore
-    private void setWebsiteName(WebsiteName websiteName) {
-        this.websiteName = websiteName;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("group", group).append("input", input).append("languages", languages).append("memoryLimit", memoryLimit).append("name", name).append("output", output).append("testType", testType).append("tests", tests).append("timeLimit", timeLimit).append("url", url).toString();
     }
-
-    @JsonIgnore
-    private void setWebsiteName() {
-        if (url != null) {
-            if (url.matches("^https:\\/\\/(www[.])?hackerrank[.]com.*$"))
-                setWebsiteName(WebsiteName.HACKER_RANK);
-            else if (url.matches("^https:\\/\\/(www[.])?codechef[.]com.*$"))
-                setWebsiteName(WebsiteName.CODE_CHEF);
-            else
-                setWebsiteName(null);
-        }
-    }
-
 }

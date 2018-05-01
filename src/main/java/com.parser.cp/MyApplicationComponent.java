@@ -15,34 +15,26 @@ import com.parser.cp.util.Common;
 import com.parser.cp.util.Constant;
 import com.parser.cp.util.FileUtility;
 import com.parser.cp.util.JacksonUtility;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
-
-/**
- * Source: - https://www.plugin-dev.com/intellij/
- */
 public class MyApplicationComponent implements ApplicationComponent {
     private static final Logger LOGGER = Logger.getLogger(MyApplicationComponent.class.getSimpleName());
     private static final int PORT = 4243;
-    private ServerSocket serverSocket;
-    private Project project;
-    private String page;
-    private boolean projectLoaded = false;
-
-    private void setProject(Project project) {
-        this.project = project;
-    }
+    private static Project project;
+    private static boolean projectLoaded = false;
 
     @Override
     public void disposeComponent() {
@@ -55,73 +47,10 @@ public class MyApplicationComponent implements ApplicationComponent {
         return "Application";
     }
 
-    @Override
-    public void initComponent() {
-        LOGGER.info("Initializing plugin data structures");
-        try {
-            serverSocket = new ServerSocket(PORT);
-            new Thread(() -> {
-                while (true) {
-                    if (serverSocket.isClosed())
-                        return;
-                    try {
-                        Socket socket = serverSocket.accept();
-                        BufferedReader bufferedReader = new BufferedReader(
-                                new InputStreamReader(socket.getInputStream(), "UTF-8"));
-                        StringBuilder builder = new StringBuilder();
-                        String s;
-                        while ((s = bufferedReader.readLine()) != null)
-                            builder.append(s).append('\n');
-                        page = builder.toString();
-                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                        //write object to Socket
-                        objectOutputStream.writeObject("ack");
-                        objectOutputStream.close();
-                        socket.close();
-                        bufferedReader.close();
-                        if (page.equals("")) {
-                            Common.sendMessage("Page :" + page, NotificationType.INFORMATION);
-                            return;
-                        }
-                        Common.sendMessage("Page :" + page, NotificationType.INFORMATION);
-                        LOGGER.info(page.substring(page.indexOf(Constant.JSON), page.length() - 1));
-                        Optional<Task> optionalTask = Common.deSerialize(page.substring(page.indexOf(Constant.JSON), page.length() - 1), Task.class);
-                        if (optionalTask.isPresent()) {
-                            TransactionGuard.getInstance().submitTransactionAndWait(() -> {
-                                if (!projectLoaded)
-                                    loadProject();
-                            });
-                            TransactionGuard.getInstance().submitTransactionAndWait(() -> {
-                                try {
-                                    /*DomParser domParser = DomParserFactory.getParser(optionalTask.get().getWebsiteName());*/
-                                    /*Task task = domParser.parse(optionalTask.get());*/
-                                    initializeTask(optionalTask.get());
-                                } catch (Exception parserDoNotExistException) {
-                                    Common.sendMessage("Error occurred during initialization of task. Error : " + parserDoNotExistException.getLocalizedMessage(), NotificationType.ERROR);
-                                }
-                            });
-                        }
-                        /*1. Parse DOM in background. This means
-                         * 1.1 If any other project is open then prompt user to load our module*/
-                    } catch (IOException e) {
-                        Common.sendMessage("Input from plugin : \r\n" + page + "\r\n Error : " + e.getLocalizedMessage(), NotificationType.ERROR);
-                        LOGGER.log(Level.SEVERE, "Error occurred during socket acceptance ", e);
-                        return;
-                    }
-                }
-            }).start();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Error occurred ", e);
-            Common.sendMessage("Input from plugin : \r\n" + page + "\r\n Error : " + e.getLocalizedMessage(), NotificationType.ERROR);
-        }
-        /*VirtualFile userHomeDir = VfsUtil.getUserHomeDir();
-        userHomeDir.findChild("java-cp");*/
-    }
-
     /**
      * Responsible for opening the project which is created from custom competitive programming template.
      */
-    private void loadProject() {
+    private static void loadProject() {
         /*1. Check if project already exists*/
         Project[] openProjects = ProjectManager.getInstance().getOpenProjects();
 
@@ -134,7 +63,7 @@ public class MyApplicationComponent implements ApplicationComponent {
                 }
             } catch (Exception e) {
                 LOGGER.info("Needed project was not found in recent history. Load as new project from template");
-                createProjectFromTemplate();
+                /*createProjectFromTemplate();*/
             }
         } else {
             Optional<Project> neededProject = Arrays.stream(openProjects).filter(currentProject -> currentProject.getName().equals(Constant.PROJECT_NAME)).findFirst();
@@ -163,7 +92,7 @@ public class MyApplicationComponent implements ApplicationComponent {
      *
      * @return Returns false if user cancels the action
      */
-    private boolean actionDialog() {
+    private static boolean actionDialog() {
         Common.sendMessage("Kindly open " + Constant.PROJECT_NAME + " project. If you don't have the project <a href='https://github.com/tgvdinesh/java-template'>clone it from Github Repository</a>", NotificationType.ERROR);
         return false;
     }
@@ -173,7 +102,7 @@ public class MyApplicationComponent implements ApplicationComponent {
      *
      * @return If project is opened from recent location then send true else false
      */
-    private boolean openFromRecent() {
+    private static boolean openFromRecent() {
         AnAction[] anActions = RecentProjectsManager.getInstance().getRecentProjectsActions(false);
         if (anActions == null || anActions.length == 0) return false;
         AnAction action = anActions[0];
@@ -186,11 +115,7 @@ public class MyApplicationComponent implements ApplicationComponent {
         return true;
     }
 
-    private void createProjectFromTemplate() {
-
-    }
-
-    private void initializeTask(Task task) throws IOException {
+    private static void initializeTask(Task task) throws IOException {
         /*1. Has the DOM parser completed it's task?*/
         /*1.1 If (it is still processing) then show loading*/
         /*1.2 If (it has already processed) then initialize the task*/
@@ -198,18 +123,38 @@ public class MyApplicationComponent implements ApplicationComponent {
         Project[] openProjects = ProjectManager.getInstance().getOpenProjects();
         Optional<Project> neededProject = Arrays.stream(openProjects).filter(currentProject -> currentProject.getName().equals(Constant.PROJECT_NAME)).findFirst();
         if (neededProject.isPresent()) {
-            Project project = neededProject.get();
-            setProject(project);
-            writeTestCases(JacksonUtility.deSerialize(task.getTests(), true));
-            /*task.getQuestions().forEach(question -> {
-                try {
-                    initializeModule(question);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });*/
+            project = neededProject.get();
+            writeTestCases(JacksonUtility.deSerialize(task.getTests(), false));
         } else {
             LOGGER.severe("This should never happen.");
+        }
+    }
+
+    private static void writeTestCases(String jsonString) throws IOException {
+        VirtualFile testCaseDirectory = project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY);
+        if (project == null ||
+                project.getBaseDir() == null ||
+                testCaseDirectory == null) {
+            throw new IOException("File not found ");
+        } else {
+            FileUtility.writeTextFile(testCaseDirectory, Constant.IO, jsonString);
+        }
+    }
+
+    private void createProjectFromTemplate() {
+
+    }
+
+    @Override
+    public void initComponent() {
+        HttpServer server;
+        try {
+            server = HttpServer.create(new InetSocketAddress(PORT), 0);
+            server.createContext("/", new CustomHttpHandler());
+            server.setExecutor(null); // creates a default executor
+            server.start();
+        } catch (IOException e) {
+            Common.sendMessage("Server initialization failed.\r\nError : " + e.getLocalizedMessage(), NotificationType.ERROR);
         }
     }
 
@@ -225,14 +170,40 @@ public class MyApplicationComponent implements ApplicationComponent {
         }
     }*/
 
-    private void writeTestCases(String jsonString) throws IOException {
-        VirtualFile testCaseDirectory = project.getBaseDir().findFileByRelativePath(Constant.TEST_CASE_DIRECTORY);
-        if (project == null ||
-                project.getBaseDir() == null ||
-                testCaseDirectory == null) {
-            throw new IOException("File not found ");
-        } else {
-            FileUtility.writeTextFile(testCaseDirectory, Constant.IO, jsonString);
+    static class CustomHttpHandler implements HttpHandler {
+
+        @Override
+        public void handle(HttpExchange httpExchange) {
+            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpExchange.getRequestBody()));
+                 OutputStream os = httpExchange.getResponseBody()
+            ) {
+                String page = bufferedReader.lines().collect(Collectors.joining(""));
+                if (page.equals("")) {
+                    Common.sendMessage("Page :" + page, NotificationType.INFORMATION);
+                    return;
+                }
+                Common.sendMessage("Page :" + page, NotificationType.INFORMATION);
+                LOGGER.info(page.substring(page.indexOf(Constant.JSON), page.length() - 1));
+                Optional<Task> optionalTask = Common.deSerialize(page.substring(page.indexOf(Constant.JSON), page.length()), Task.class);
+                if (optionalTask.isPresent()) {
+                    TransactionGuard.getInstance().submitTransactionAndWait(() -> {
+                        if (!projectLoaded)
+                            loadProject();
+                    });
+                    TransactionGuard.getInstance().submitTransactionAndWait(() -> {
+                        try {
+                            initializeTask(optionalTask.get());
+                        } catch (Exception parserDoNotExistException) {
+                            Common.sendMessage("Error occurred during initialization of task. Error : " + parserDoNotExistException.getLocalizedMessage(), NotificationType.ERROR);
+                        }
+                    });
+                }
+                byte[] response = "".getBytes();
+                httpExchange.sendResponseHeaders(200, 0);
+                os.write(response);
+            } catch (Exception e) {
+                Common.sendMessage("Error occurred during initialization of task. Error : " + e.getLocalizedMessage(), NotificationType.ERROR);
+            }
         }
     }
 
