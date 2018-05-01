@@ -23,9 +23,6 @@ intellij {
     version '2017.3.5'
     pluginName 'mind-sport'
     updateSinceUntilBuild false
-    publish {
-        pluginId '10652-competitive-program-parser'
-    }
 }
 patchPluginXml {
     changeNotes """
