@@ -9,15 +9,9 @@
     You should have Mind Sport IntelliJ Plugin installed for this to work.
 
     Pre-requisites:
-    1. Install [Mind Sport - IntelliJ Plugin](http://plugins.jetbrains.com/plugin/10652-competitive-program-parser)
-    2. Install [Mind Sport - Chrome Plugin](https://chrome.google.com/webstore/detail/mind-sport/epnaneaijfpjdfpbbnllhcflnammlcnh)
+    1. IntelliJ Plugin - Mind Sport
+    2. Chrome Plugin - Mind Sport Companion
     3. Clone and open [Java Template](https://github.com/tgvdinesh/mind-sport)
-
-    Steps:
-    1. Open <a href="https://github.com/tgvdinesh/java-template">Java Template</a> local project in IntelliJ.
-    2. Open Competitive programming challenge. Eg: Hacker Rank, Code Chef, etc. The <a href="https://github.com/tgvdinesh/chelper-companion#supported-websites">list of supported websites are given here</a>.
-    3. Click on Mind sport chrome extension shown on top of chrome browser.
-    4. That's all. You'll now see that the plugin will have replaced your io.json file and you are ready to solve the problem.
 
     PS: You should have opened java-template project in IntelliJ or it should at least be open previously for this plugin to work.
     ]]></description>
