@@ -5,15 +5,6 @@
 
     <description><![CDATA[
     Competitive Programming parser - Mind Sport
-
-    You should have Mind Sport IntelliJ Plugin installed for this to work.
-
-    Pre-requisites:
-    1. IntelliJ Plugin - Mind Sport
-    2. Chrome Plugin - Mind Sport Companion
-    3. Clone and open [Java Template](https://github.com/tgvdinesh/mind-sport)
-
-    PS: You should have opened java-template project in IntelliJ or it should at least be open previously for this plugin to work.
     ]]></description>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
