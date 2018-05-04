@@ -1,12 +1,10 @@
 # mind-sport [![Build Status](https://travis-ci.org/tgvdinesh/mind-sport.svg?branch=master)](https://travis-ci.org/tgvdinesh/mind-sport)
-DOM Parser for CP
-
+Competitive programming helper.
 
 # Setup
-1. Install [Mind Sport - IntelliJ Plugin](http://plugins.jetbrains.com/plugin/10652-competitive-program-parser)
+1. Install [Mind Sport - IntelliJ Plugin](https://plugins.jetbrains.com/plugin/10688-mind-sport)
 2. Install [Mind Sport - Chrome Plugin](https://chrome.google.com/webstore/detail/mind-sport/epnaneaijfpjdfpbbnllhcflnammlcnh)
-3. Clone and open [Java Template](https://github.com/tgvdinesh/mind-sport)
-
+3. Clone and open [Java Template](https://github.com/tgvdinesh/java-template)
 
 # Road Map
 - [X] Implement parser for multiple sample input/output [Sample 1](https://www.hackerrank.com/challenges/30-conditional-statements/problem)
