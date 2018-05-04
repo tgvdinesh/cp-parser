@@ -11,6 +11,11 @@ Competitive programming helper.
 - [X] Implement parser for all Competitive Programming websites
 - [X] [Publish IntelliJ plugin](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/publishing_plugin.html)
 - [X] If possible display build status with [IntelliJ](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
+- [X] Add video instructions
+- [ ] Split branches
+    - **master** for up to date merged code
+    - **develop** for current development
+    - **release** for public release
 - [ ] Add property file
 - [ ] Change listening port in plugin
 - [ ] Adopt to standards
