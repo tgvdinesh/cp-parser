@@ -16,9 +16,10 @@ Competitive programming helper.
     - **master** for up to date merged code
     - **develop** for current development
     - **release** for public release
-- [ ] Update travis to build with only release branch
+- [x] Update travis to build with only release branch
 - [ ] Add property file
 - [ ] Change listening port in plugin
+- [ ] Work on clone project from github if not found in local
 - [ ] Adopt to standards
 	- Changelog
 		- https://blog.github.com/2018-05-03-introducing-the-github-changelog/
