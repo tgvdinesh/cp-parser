@@ -14,6 +14,18 @@ DOM Parser for CP
 - [X] [Publish IntelliJ plugin](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/publishing_plugin.html)
 - [X] If possible display build status with [IntelliJ](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 - [ ] Add property file
+- [ ] Change listening port in plugin
+- [ ] Adopt to standards
+	- Changelog
+		- https://blog.github.com/2018-05-03-introducing-the-github-changelog/
+		- https://keepachangelog.com/en/1.0.0/
+	- Contributing guidelines
+		- https://blog.github.com/2012-09-17-contributing-guidelines/
+	- Rally
+		- https://www.openstack.org/
+- [ ] Marketing
+	- https://graphicdesign.stackexchange.com/questions/2489/how-to-design-sleek-magnifying-glass-effects-like-these
+	- Add GIFs to explain steps
 - [ ] Add a task tracker for parser project like Jira
 - [ ] Implement quality assurance
 - [ ] Show [Progress Indicator](https://github.com/JetBrains/intellij-community/search?utf8=%E2%9C%93&q=ProgressIndicator&type=)
