@@ -12,10 +12,11 @@ Competitive programming helper.
 - [X] [Publish IntelliJ plugin](https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/publishing_plugin.html)
 - [X] If possible display build status with [IntelliJ](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 - [X] Add video instructions
-- [ ] Split branches
+- [x] Split branches
     - **master** for up to date merged code
     - **develop** for current development
     - **release** for public release
+- [ ] Update travis to build with only release branch
 - [ ] Add property file
 - [ ] Change listening port in plugin
 - [ ] Adopt to standards
