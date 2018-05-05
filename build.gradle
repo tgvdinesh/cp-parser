@@ -26,9 +26,19 @@ intellij {
     publish {
         pluginId '10688-mind-sport'
     }
+    getProperties()
 }
 patchPluginXml {
     changeNotes """
       Contains support for multiple websites.<br>
       <em>Integraed CI</em>"""
+}
+
+task hello << {
+    println TEST
+    println NAME
+}
+
+file("gradle.properties").withInputStream {
+    stream -> new Properties().load(stream)
 }

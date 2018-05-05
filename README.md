@@ -3,7 +3,7 @@ Competitive programming helper.
 
 # Setup
 1. Install [Mind Sport - IntelliJ Plugin](https://plugins.jetbrains.com/plugin/10688-mind-sport)
-2. Install [Mind Sport - Chrome Plugin](https://chrome.google.com/webstore/detail/mind-sport/epnaneaijfpjdfpbbnllhcflnammlcnh)
+2. Install [CHelper Companion - Chrome Plugin](https://chrome.google.com/webstore/detail/chelper-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl)
 3. Clone and open [Java Template](https://github.com/tgvdinesh/java-template)
 
 # Road Map
@@ -17,9 +17,12 @@ Competitive programming helper.
     - **develop** for current development
     - **release** for public release
 - [x] Update travis to build with only release branch
-- [ ] Add property file
-- [ ] Change listening port in plugin
+- [ ] Adapt to [CHelper Companion Browser Extension](https://chrome.google.com/webstore/detail/chelper-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl)
+- [ ] Raise issue from Plugin without any duplicates in GitHub page
 - [ ] Work on clone project from github if not found in local
+- [ ] Add property file
+- [ ] Add help in IntelliJ Action search.
+- [ ] Change listening port in plugin
 - [ ] Adopt to standards
 	- Changelog
 		- https://blog.github.com/2018-05-03-introducing-the-github-changelog/
@@ -54,3 +57,6 @@ Competitive programming helper.
 1. [IntelliJ Platform SDK DevGuide](http://www.jetbrains.org/intellij/sdk/docs/welcome.html)
 2. [Chrome plugin](https://github.com/jmerle/chelper-companion/tree/feature/universal)
 3. [IntelliJ Plugin](http://plugins.jetbrains.com/plugin/10652-competitive-program-parser)
+4. [Gitter IntelliJ Plugin Developers](https://gitter.im/IntelliJ-Plugin-Developers/Lobby)
+4. [How to use IntelliJ](https://www.jetbrains.com/idea/documentation/)
+5. [IntelliJ Community Find](https://github.com/JetBrains/intellij-community/find/master)
