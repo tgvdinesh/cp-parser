@@ -17,7 +17,7 @@ Competitive programming helper.
     - **develop** for current development
     - **release** for public release
 - [x] Update travis to build with only release branch
-- [ ] Adapt to [CHelper Companion Browser Extension](https://chrome.google.com/webstore/detail/chelper-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl)
+- [x] Adapt to [CHelper Companion Browser Extension](https://chrome.google.com/webstore/detail/chelper-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl)
 - [ ] Raise issue from Plugin without any duplicates in GitHub page
 - [ ] Work on clone project from github if not found in local
 - [ ] Add property file

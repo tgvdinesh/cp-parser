@@ -152,7 +152,7 @@ public class MyApplicationComponent implements ApplicationComponent {
             try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpExchange.getRequestBody()));
                  OutputStream os = httpExchange.getResponseBody()
             ) {
-                String page = bufferedReader.lines().collect(Collectors.joining(""));
+                String page = bufferedReader.lines().collect(Collectors.joining("\n"));
                 if (page.equals("")) {
                     Common.sendMessage("Page :" + page, NotificationType.INFORMATION);
                     return;
