@@ -3,7 +3,7 @@ Competitive programming helper.
 
 # Setup
 1. Install [Mind Sport - IntelliJ Plugin](https://plugins.jetbrains.com/plugin/10688-mind-sport)
-2. Install [CHelper Companion - Chrome Plugin](https://chrome.google.com/webstore/detail/chelper-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl)
+2. Install Competitive Companion [Chrome Extension](https://chrome.google.com/webstore/detail/competitive-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl) / [Firefox Add-on](https://addons.mozilla.org/en-US/firefox/addon/competitive-companion/)
 3. Clone and open [Java Template](https://github.com/tgvdinesh/java-template)
 
 # Road Map
@@ -18,8 +18,8 @@ Competitive programming helper.
     - **release** for public release
 - [x] Update travis to build with only release branch
 - [x] Adapt to [CHelper Companion Browser Extension](https://chrome.google.com/webstore/detail/chelper-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl)
-- [ ] Raise issue from Plugin without any duplicates in GitHub page
-- [ ] Work on clone project from github if not found in local
+- [ ] Raise issue from Plugin without any duplicates in [GitHub page](https://github.com/jmerle/competitive-companion/issues) using URL as Issue title
+- [ ] Move all TODO from README under [Github Milestone](https://github.com/tgvdinesh/mind-sport-intellij-plugin/milestones)
 - [ ] Add property file
 - [ ] Add help in IntelliJ Action search.
 - [ ] Change listening port in plugin

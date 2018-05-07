@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 public class MyApplicationComponent implements ApplicationComponent {
     private static final Logger LOGGER = Logger.getLogger(MyApplicationComponent.class.getSimpleName());
-    private static final int PORT = 4243;
+    private static final int PORT = 6174;
     private static Project project;
     private static boolean projectLoaded = false;
 
@@ -158,7 +158,7 @@ public class MyApplicationComponent implements ApplicationComponent {
                     return;
                 }
                 HTMLParser htmlParser = new HTMLParser("pre", page);
-                Optional<Task> optionalTask = htmlParser.parse();
+                Optional<Task> optionalTask = htmlParser.newParser();
                 if (optionalTask.isPresent()) {
                     TransactionGuard.getInstance().submitTransactionAndWait(() -> {
                         if (!projectLoaded)
