@@ -1,5 +1,5 @@
-# mind-sport [![Build Status](https://travis-ci.org/tgvdinesh/mind-sport.svg?branch=release)](https://travis-ci.org/tgvdinesh/mind-sport)
-Competitive programming helper.
+# mind-sport-intellij-plugin [![Build Status](https://travis-ci.org/tgvdinesh/mind-sport-intellij-plugin.svg?branch=master)](https://travis-ci.org/tgvdinesh/mind-sport-intellij-plugin)
+Competitive programming helper. Fills test cases in your java project with project name as `java-template`
 
 # Setup
 1. Install [Mind Sport - IntelliJ Plugin](https://plugins.jetbrains.com/plugin/10688-mind-sport)
