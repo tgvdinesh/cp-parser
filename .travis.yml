@@ -28,9 +28,7 @@ before_deploy:
      - git config --local user.email $GIT_AUTHOR_EMAIL
      - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 deploy:
-  on:
-   branch: release
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
   skip_cleanup: true
-  file: $CI_HOME/build/distributions/mind-sport-1.1-SNAPSHOT.zip
+  file: $CI_HOME/build/distributions/mind-sport-1.1.1-SNAPSHOT.zip
