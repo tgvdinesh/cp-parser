@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.parser.cp'
-version '1.1.1-SNAPSHOT'
+version '1.1.2-RELEASE'
 
 apply plugin: 'java'
 
@@ -30,6 +30,25 @@ intellij {
 }
 patchPluginXml {
     changeNotes """
-      Contains support for multiple websites.<br>
-      <em>Integraed CI</em>"""
+      <h3>Setup:</h3>
+<ol>
+<li>Install <a href="https://plugins.jetbrains.com/plugin/10688-mind-sport" rel="nofollow">Mind Sport - IntelliJ Plugin</a></li>
+<li>Install Competitive Companion <a href="https://chrome.google.com/webstore/detail/competitive-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl" rel="nofollow">Chrome Extension</a> / <a href="https://addons.mozilla.org/en-US/firefox/addon/competitive-companion/" rel="nofollow">Firefox Add-on</a></li>
+<li>Clone and open <a href="https://github.com/tgvdinesh/java-template" rel="nofollow">Java Template</a></li>
+</ol>
+<p><em><em>NOTE:</em> This step will be removed in <a href="https://github.com/tgvdinesh/mind-sport-intellij-plugin/issues/2" rel="nofollow">future release</a></em></p>
+<h3>How to use:</h3>
+<ol>
+<li>Keep <a href="https://github.com/tgvdinesh/java-template" rel="nofollow">Java Template</a> project open / It should be at least in recent history in IntelliJ</li>
+<li>Go to <a href="https://github.com/jmerle/competitive-companion#supported-websites" rel="nofollow">Supported Competitive Programming websites's</a> problem statement</li>
+<li>Click on Competitive Companion plugin on right top corner of your browser.</li>
+</ol>
+<p>That's it. You can start coding and click on run with <em>AppTest.runTestCases</em> as your run configuration.
+What happens in the background is, your <code>io.json</code> file will be updated with the test cases.</p>
+Interdependency Reference:
+<ol>
+<li><a href="https://github.com/tgvdinesh/mind-sport-intellij-plugin" rel="nofollow">IntelliJ Plugin</a></li>
+<li><a href="https://github.com/tgvdinesh/java-template" rel="nofollow">Java project template</a> used by IntelliJ Plugin</li>
+<li>Competitive Companion <a href="https://chrome.google.com/webstore/detail/competitive-companion/cjnmckjndlpiamhfimnnjmnckgghkjbl" rel="nofollow">Chrome Extension</a> / <a href="https://addons.mozilla.org/en-US/firefox/addon/competitive-companion/" rel="nofollow">Firefox Add-on</a></li>
+</ol>"""
 }
