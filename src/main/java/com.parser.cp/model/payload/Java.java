@@ -1,6 +1,7 @@
 
 package com.parser.cp.model.payload;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,6 +12,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
     "mainClass",
     "taskClass"
 })
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Java {
 
     @JsonProperty("mainClass")
