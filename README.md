@@ -28,3 +28,8 @@ What happens in the background is, your `io.json` file will be updated with the 
 4. [Gitter IntelliJ Plugin Developers](https://gitter.im/IntelliJ-Plugin-Developers/Lobby)
 4. [How to use IntelliJ](https://www.jetbrains.com/idea/documentation/)
 5. [IntelliJ Community Find](https://github.com/JetBrains/intellij-community/find/master)
+
+## Donation
+If this project help you reduce time to develop, you can give me a cup of coffee :) <br/><br/>
+
+[![Donate](https://www.paypalobjects.com/en_GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JTFHLYNLZLRDG&source=url)
