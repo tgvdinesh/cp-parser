@@ -31,4 +31,4 @@ deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
   skip_cleanup: true
-  file: $CI_HOME/build/distributions/mind-sport-1.1.3-RELEASE.zip
+  file: $CI_HOME/build/distributions/mind-sport-1.1.4-RELEASE.zip

@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.parser.cp'
-version '1.1.3-RELEASE'
+version '1.1.4-RELEASE'
 
 apply plugin: 'java'
 

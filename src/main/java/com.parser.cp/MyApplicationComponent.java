@@ -112,6 +112,7 @@ public class MyApplicationComponent implements ApplicationComponent {
         if (neededProject.isPresent()) {
             project = neededProject.get();
             writeTestCases(JacksonUtility.deSerialize(task.getTests(), false));
+            Common.sendMessage(task.getName() + " added successfully!", NotificationType.INFORMATION);
         } else {
             LOGGER.severe("This should never happen.");
         }
